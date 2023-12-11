@@ -95,9 +95,11 @@ class App
 
     public static function send(TcpConnection $connection, Request $request): void
     {
-        // $_SERVER['HTTPS'] = 'on';
         $_SERVER['REQUEST_TIME_FLOAT'] = self::$requestTimeFloat;
         $_SERVER['REQUEST_TIME'] = self::$requestTime;
+        if (isset($_SERVER['HTTP_HTTPS'])) {
+            $_SERVER['HTTPS'] = $_SERVER['HTTP_HTTPS'];
+        }
         ob_start();
 
         $http = static::$app->http;

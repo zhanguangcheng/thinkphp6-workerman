@@ -33,9 +33,4 @@ $config = [
 Session::handlerClass(RedisSessionHandler::class, $config);
 */
 
-// Automatically reload after file changes
-if (extension_loaded('inotify')) {
-    require_once __DIR__ . '/monitor.php';
-}
-
 Worker::runAll();

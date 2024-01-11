@@ -75,31 +75,14 @@ class ThinkApp extends think\App
 class App
 {
     public static ThinkApp $app;
-    public static string $headerDate;
-    public static int $requestTime;
-    public static float $requestTimeFloat;
 
     public static function init(): void
     {
-        self::timer();
-        Timer::add(1, [self::class, 'timer']);
         static::$app = new ThinkApp();
-    }
-
-    public static function timer(): void
-    {
-        self::$headerDate = 'Date: ' . gmdate('D, d M Y H:i:s') . ' GMT';
-        self::$requestTime = time();
-        self::$requestTimeFloat = microtime(true);
     }
 
     public static function send(TcpConnection $connection, Request $request): void
     {
-        $_SERVER['REQUEST_TIME_FLOAT'] = self::$requestTimeFloat;
-        $_SERVER['REQUEST_TIME'] = self::$requestTime;
-        if (isset($_SERVER['HTTP_HTTPS'])) {
-            $_SERVER['HTTPS'] = $_SERVER['HTTP_HTTPS'];
-        }
         ob_start();
 
         $http = static::$app->http;
@@ -107,7 +90,6 @@ class App
         $response->send();
         $http->end($response);
 
-        header(self::$headerDate);
         $connection->send((string)ob_get_clean());
     }
 

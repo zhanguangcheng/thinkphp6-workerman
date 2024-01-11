@@ -20,7 +20,7 @@ composer install --optimize-autoloader --classmap-authoritative
 
 Add to php.ini file
 ```ini
-disable_functions=set_time_limit,header,header_remove,headers_sent,headers_list,http_response_code,setcookie,setrawcookie,session_start,session_id,session_name,session_save_path,session_status,session_write_close,session_regenerate_id,session_unset,session_destroy,is_uploaded_file,move_uploaded_file
+disable_functions=set_time_limit,header,header_remove,headers_sent,headers_list,http_response_code,setcookie,setrawcookie,session_start,session_write_close,session_status,session_id,session_name,session_save_path,session_regenerate_id,session_unset,session_destroy,session_set_cookie_params,session_get_cookie_params,is_uploaded_file,move_uploaded_file
 ```
 
 ```bash
